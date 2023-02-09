@@ -21,7 +21,7 @@ public class FuncionesEj1 {
 			}
 		}
 
-		//dividir for en 3 for 0 , 1 y 2
+		//dividir for en 3, for 0 , for 1 y for 2 , cada uno empezando por una posicion diferente
 		for (int posicion = 0; posicion < tablaCreada.length; posicion++) {
 
 			if ((tablaCreada[posicion] == '*') && (tablaCreada[posicion] != tablaCreada[tablaCreada.length - 1])) {
