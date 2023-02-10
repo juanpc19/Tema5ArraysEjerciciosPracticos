@@ -8,6 +8,8 @@ public class Main {
 
 		char tablero[] = new char[0];
 
+		// cerrar el escaner solo cuando este todo hecho sino puede dar error
+		// cerrarlo desde el main que deberia cerrar tambien el de la funcion
 		Scanner dogma = new Scanner(System.in);
 
 		System.out.println("¿Cuantas casillas desea en su tablero? ");
@@ -18,9 +20,7 @@ public class Main {
 
 		FuncionesEj1.minas = dogma.nextInt();
 
-		dogma.close();
-
-		tablero=FuncionesEj1.creaArray(tablero);
+		tablero = FuncionesEj1.creaArray(tablero);
 
 		FuncionesEj1.ejecutaJuego(tablero);
 
