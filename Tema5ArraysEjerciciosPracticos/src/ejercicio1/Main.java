@@ -1,11 +1,12 @@
 package ejercicio1;
 
-
 import java.util.Scanner;
 
 public class Main {
 
 	public static void main(String[] args) {
+
+		char tablero[] = new char[0];
 
 		Scanner dogma = new Scanner(System.in);
 
@@ -17,9 +18,11 @@ public class Main {
 
 		FuncionesEj1.minas = dogma.nextInt();
 
-		FuncionesEj1.creaArray();
-
 		dogma.close();
+
+		tablero=FuncionesEj1.creaArray(tablero);
+
+		FuncionesEj1.ejecutaJuego(tablero);
 
 	}
 

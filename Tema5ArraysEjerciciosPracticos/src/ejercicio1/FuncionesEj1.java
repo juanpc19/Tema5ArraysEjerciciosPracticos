@@ -1,6 +1,7 @@
 package ejercicio1;
 
 import java.util.Arrays;
+import java.util.Scanner;
 
 public class FuncionesEj1 {
 
@@ -8,7 +9,7 @@ public class FuncionesEj1 {
 
 	static int minas = 0;
 
-	static char[] creaArray() {
+	static char[] creaArray(char tablaMain[]) {
 
 		char tablaCreada[] = new char[longitud];
 
@@ -48,9 +49,37 @@ public class FuncionesEj1 {
 			}
 		}
 
-		//print para comprobar funcion quitar al finalizar ejercicio
+		// print para comprobar funcion quitar al finalizar ejercicio
 		System.out.println(Arrays.toString(tablaCreada));
 
 		return tablaCreada;
 	}
+
+	static void ejecutaJuego(char tablaMain[]) {
+
+		char tablaCopiada[] = tablaMain;
+
+		int numero = 0;
+
+		int contador = 0;
+
+		Scanner dogma = new Scanner(System.in);
+
+		while (tablaCopiada[numero] != '*' && contador <= longitud - minas) {
+
+			System.out.println("Indique una casilla a destapar entre 0 y " + longitud);
+
+			numero = dogma.nextInt();
+
+			for (int posicion = 0; posicion < tablaCopiada.length; posicion++) {
+
+				if (tablaCopiada[numero] == tablaCopiada[posicion]) {
+					System.out.println(tablaCopiada[posicion]);
+				}
+			}
+			contador++;
+
+		}
+	}
+
 }
