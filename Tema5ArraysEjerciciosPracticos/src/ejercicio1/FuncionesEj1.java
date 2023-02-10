@@ -17,7 +17,7 @@ public class FuncionesEj1 {
 
 		int contador = 0;
 
-		for (int posicion = 0; posicion < tablaCreada.length; posicion++) {
+		for (int posicion = 0; posicion < longitud; posicion++) {
 			tablaCreada[posicion] = '0';
 		}
 
@@ -29,7 +29,7 @@ public class FuncionesEj1 {
 				tablaCreada[posInsercionAleatoria] = '*';
 				contador++;
 
-				if (posInsercionAleatoria != tablaCreada.length - 1 && tablaCreada[posInsercionAleatoria + 1] != '*') {
+				if (posInsercionAleatoria != longitud - 1 && tablaCreada[posInsercionAleatoria + 1] != '*') {
 					tablaCreada[posInsercionAleatoria + 1] = '1';
 				}
 
@@ -40,9 +40,9 @@ public class FuncionesEj1 {
 
 		}
 
-		for (int posicion = 0; posicion < tablaCreada.length; posicion++) {
+		for (int posicion = 0; posicion < longitud; posicion++) {
 
-			if (posicion != 0 && posicion != tablaCreada.length - 1 && tablaCreada[posicion - 1] == '*'
+			if (posicion != 0 && posicion != longitud - 1 && tablaCreada[posicion - 1] == '*'
 					&& tablaCreada[posicion + 1] == '*' && tablaCreada[posicion] != '*') {
 
 				tablaCreada[posicion] = '2';
@@ -57,29 +57,38 @@ public class FuncionesEj1 {
 
 	static void ejecutaJuego(char tablaMain[]) {
 
-		char tablaCopiada[] = tablaMain;
+		char tablaJugador[] = new char[longitud];
 
-		int numero = 0;
-
-		int contador = 0;
+		int numero;
 
 		Scanner dogma = new Scanner(System.in);
 
-		while (tablaCopiada[numero] != '*' && contador <= longitud - minas) {
+		// rellena array jugador con ?
+		for (int posicion = 0; posicion < longitud; posicion++) {
+			tablaJugador[posicion] = '?';
+		}
 
-			System.out.println("Indique una casilla a destapar entre 0 y " + longitud);
+		do {
+
+			System.out.println("Indique una casilla a destapar entre 0 y " + (longitud - 1));
 
 			numero = dogma.nextInt();
 
-			for (int posicion = 0; posicion < tablaCopiada.length; posicion++) {
+			tablaJugador[numero] = tablaMain[numero];
 
-				if (tablaCopiada[numero] == tablaCopiada[posicion]) {
-					System.out.println(tablaCopiada[posicion]);
-				}
+			if (numero==0 && tablaMain[numero + 1] == tablaMain[numero])  {
+				tablaJugador[numero] = tablaMain[numero];
+
+			} else if (numero == longitud-1 && tablaMain[numero - 1] == tablaMain[numero])  {
+				tablaJugador[numero] = tablaMain[numero];
+
 			}
-			contador++;
 
-		}
+			System.out.println(Arrays.toString(tablaJugador));
+
+		} while (tablaMain[numero] !='*');
+		
+		System.out.println("Ha perdido.");
 	}
 
 }

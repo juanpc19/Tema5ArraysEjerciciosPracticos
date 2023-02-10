@@ -4,6 +4,8 @@ import java.util.Scanner;
 
 public class Main {
 
+	// crear funcion con boleanos y añadir boleano a do while para comprobar si he ganado
+	//(for recorre array y si todas posiciones diferentes a ? he ganado) 
 	public static void main(String[] args) {
 
 		char tablero[] = new char[0];
