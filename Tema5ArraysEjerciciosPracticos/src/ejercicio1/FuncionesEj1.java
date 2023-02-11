@@ -5,90 +5,204 @@ import java.util.Scanner;
 
 public class FuncionesEj1 {
 
-	static int longitud = 0;
+	static int longitud;// guardara la longitud que usare en todos los arrays (tableros) dada por
+	// usuario en main
 
-	static int minas = 0;
+	static int minas;// guardara la cantidad de minas que usare en todos los arrays (tableros) dada
+	// por usuario en main
 
-	static char[] creaArray(char tablaMain[]) {
+	static int numeroJugador;// guardara el numero introducido por el jugador
 
-		char tablaCreada[] = new char[longitud];
+	static boolean victoria;// guardara el estado de la partida inicializado por defecto a false
 
-		int posInsercionAleatoria;
+	static char tableroCreado[];// guardara el tablero creado por la funcion creaArray
 
-		int contador = 0;
+	static char tableroJugador[];// guardara el tablero del jugador que creara la funcion ejecutaJuego
 
+	// funcion estatica que creara el tablero para la partida,
+	// llenandolo de minas, 0, 1, o 2
+	static void creaArray() {
+
+		tableroCreado = new char[longitud];// doy a atributo tableroCreado longitud igual a atributo longitud
+
+		int posInsercionAleatoria;// guardara un valor aleatorio a usar como posicion en tableroCreado
+
+		int contador = 0; // guardara cantidad de minas insertadas en tableroCreado
+
+		// recorro tableroCreado
 		for (int posicion = 0; posicion < longitud; posicion++) {
-			tablaCreada[posicion] = '0';
+			// dando valor 0 a todos sus elementos
+			tableroCreado[posicion] = '0';
 		}
 
+		// bucle que se ejecutara mientras queden minas a insertar
 		while (contador < minas) {
 
+			// inserto una mina en una posicion aleatoria entre 0 y longitud, debido a
+			// funcionamiento de Math.random() posInsercionAleatoria tomara un valor de
+			// longitud-1
 			posInsercionAleatoria = (int) (Math.random() * longitud);
 
-			if (tablaCreada[posInsercionAleatoria] != '*') {
-				tablaCreada[posInsercionAleatoria] = '*';
+			// si la posInsercionAleatoria no contiene un mina
+			if (tableroCreado[posInsercionAleatoria] != '*') {
+				// la insertara en dicha posicion
+				tableroCreado[posInsercionAleatoria] = '*';
+				// y añadira +1 al contador
 				contador++;
 
-				if (posInsercionAleatoria != longitud - 1 && tablaCreada[posInsercionAleatoria + 1] != '*') {
-					tablaCreada[posInsercionAleatoria + 1] = '1';
+				// si la posicion donde inserto la mina no es la ultima casilla y la siguiente
+				// casilla no contiene una mina
+				if (posInsercionAleatoria != longitud - 1 && tableroCreado[posInsercionAleatoria + 1] != '*') {
+					// inserto una mina en la siguiente casilla
+					tableroCreado[posInsercionAleatoria + 1] = '1';
 				}
-
-				if (posInsercionAleatoria != 0 && tablaCreada[posInsercionAleatoria - 1] != '*') {
-					tablaCreada[posInsercionAleatoria - 1] = '1';
+				// si la posicion donde inserto la mina no es la primera casilla y la anterior
+				// casilla no contiene una mina
+				if (posInsercionAleatoria != 0 && tableroCreado[posInsercionAleatoria - 1] != '*') {
+					// inserto una mina en la anterior casilla
+					tableroCreado[posInsercionAleatoria - 1] = '1';
 				}
 			}
-
 		}
 
+		// recorro el array tableroCreado
 		for (int posicion = 0; posicion < longitud; posicion++) {
 
-			if (posicion != 0 && posicion != longitud - 1 && tablaCreada[posicion - 1] == '*'
-					&& tablaCreada[posicion + 1] == '*' && tablaCreada[posicion] != '*') {
-
-				tablaCreada[posicion] = '2';
+			// si la posicion actual no es ni la primera ni la ultima casilla, no contiene
+			// una mina y las casillas siguiente y anterior son minas
+			if (posicion != 0 && posicion != longitud - 1 && tableroCreado[posicion - 1] == '*'
+					&& tableroCreado[posicion + 1] == '*' && tableroCreado[posicion] != '*') {
+				// inserto valor 2 en la casilla actual
+				tableroCreado[posicion] = '2';
 			}
 		}
+		// print para comprobar funcionamiento con facilidad
+		System.out.println(Arrays.toString(tableroCreado));
 
-		// print para comprobar funcion quitar al finalizar ejercicio
-		System.out.println(Arrays.toString(tablaCreada));
-
-		return tablaCreada;
 	}
 
-	static void ejecutaJuego(char tablaMain[]) {
+	// funcion estatica que destapara las casillas adyacentes a la seleccionada por
+	// el
+	// jugador si estas no son minas o fin de tablero
+	static void destapaMultiplesCasillas() {
 
-		char tablaJugador[] = new char[longitud];
-
-		int numero;
-
-		Scanner dogma = new Scanner(System.in);
-
-		// rellena array jugador con ?
-		for (int posicion = 0; posicion < longitud; posicion++) {
-			tablaJugador[posicion] = '?';
+		// bucle que recorre tableroCreado hacia la izquierda desde la posicion anterior
+		// a la indicada por el jugador mientras no se salga del tablero y no encuentre
+		// una mina
+		for (int incremento = 1; numeroJugador - incremento >= 0
+				&& tableroCreado[numeroJugador - incremento] != '*'; incremento++) {
+			// destapando la casilla en tableroJugador
+			tableroJugador[numeroJugador - incremento] = tableroCreado[numeroJugador - incremento];
 		}
 
+		// bucle que recorre tableroCreado hacia la derecha desde la posicion siguiente
+		// a la indicada por el jugador mientras no se salga del tablero y no encuentre
+		// una mina
+		for (int incremento = 1; numeroJugador + incremento <= longitud - 1
+				&& tableroCreado[numeroJugador + incremento] != '*'; incremento++) {
+			// destapando la casilla en tableroJugador
+			tableroJugador[numeroJugador + incremento] = tableroCreado[numeroJugador + incremento];
+		}
+	}
+
+	// funcion estatica que contara la cantidad de casillas destapadas con exito por
+	// el
+	// jugador modificando el valor de el elemento victoria si el jugador ha
+	// destapado las casillas necesarias
+	static void jugadorGana() {
+
+		int contador = 0;// guardara la cantidad de casillas del array tableroJugador que contienen un
+		// valor diferente a '?'
+
+		// recorro el array tableroJugador
+		for (int posicion = 0; posicion < longitud; posicion++) {
+
+			// si su posicion contiene un elemento diferente a '?' y diferente a una mina
+			if (tableroJugador[posicion] != '?' && tableroJugador[posicion] != '*') {
+				// la cuento sumando +1 a contador
+				contador++;
+			}
+			// si contador ha tomado un valor igual a longitud - minas significara que solo
+			// quedan por destapar las casillas que contienen minas por lo que el jugador
+			// habra ganado la partida
+			if (contador == longitud - minas) {
+				// en ese caso doy a atributo victoria valor igual a true
+				victoria = true;
+			}
+		}
+	}
+
+	// funcion que creara el tablero del jugador y lo llenara de incognitas ('?')
+	// mostrandoselo una vez, entonces entrara en un bucle que mostrara al jugador
+	// su tablero y le solicitara una casilla a destapar que destapara
+	// usando funcion destapaMultiplesCasillas segun sea oportuno o no, el bucle
+	// estara en ejecucion mientras el jugador no seleccione una casilla con mina
+	// o gane la partida (para esta comprobacion usara la funcion jugadorGana),
+	// al salir de bucle comprobara que mensaje dar al usuario
+	// segun este gane o pierda la partida
+	static void ejecutaJuego() {
+
+		tableroJugador = new char[longitud];// doy al atributo tableroJugador una longitud igual a atributo longitud
+
+		// creo escaner y lo nombro dogma
+		Scanner dogma = new Scanner(System.in);
+
+		// recorro tableroJugador
+		for (int posicion = 0; posicion < longitud; posicion++) {
+			// dando valor '?' a todas sus posiciones
+			tableroJugador[posicion] = '?';
+		}
+
+		// mensaje por consola de inicio de partida
+		System.out.println("¡Empieza el juego!");
+		System.out.println();
+
+		// muestro al jugador su tablero
+		System.out.println(Arrays.toString(tableroJugador));
+
+		// conjunto de instrucciones de bucle do while
 		do {
 
+			// solicito al jugador casilla a destapar
 			System.out.println("Indique una casilla a destapar entre 0 y " + (longitud - 1));
 
-			numero = dogma.nextInt();
+			// doy a atributo numeroJugador valor introducido por jugador
+			numeroJugador = dogma.nextInt();
 
-			tablaJugador[numero] = tablaMain[numero];
+			// destapa casilla de tableroJugador en posicion numeroJugador sea mina o no
+			tableroJugador[numeroJugador] = tableroCreado[numeroJugador];
 
-			if (numero==0 && tablaMain[numero + 1] == tablaMain[numero])  {
-				tablaJugador[numero] = tablaMain[numero];
-
-			} else if (numero == longitud-1 && tablaMain[numero - 1] == tablaMain[numero])  {
-				tablaJugador[numero] = tablaMain[numero];
-
+			// uso funcion destapaMultiplesCasillas tableroCreado en posicion de
+			// numeroJugador no es mina
+			if (tableroCreado[numeroJugador] != '*') {
+				destapaMultiplesCasillas();
 			}
 
-			System.out.println(Arrays.toString(tablaJugador));
+			// uso funcion jugadorGana para comprobar el estado de la partida
+			jugadorGana();
 
-		} while (tablaMain[numero] !='*');
-		
-		System.out.println("Ha perdido.");
+			// muestro a jugador su tablero actualizado con las casillas destapadas
+			System.out.println(Arrays.toString(tableroJugador));
+
+			// mientras posicion numeroJugador de tableroCreado sea distinto a mina
+			// y victoria no sea igual a true el bucle se mantendra en ejecucion
+		} while (tableroCreado[numeroJugador] != '*' && victoria != true);
+
+		// al salir del bucle comprobara el estado de victoria, de ser este true
+		// significa que el jugador ha ganado
+		if (victoria == true) {
+			// se lo comunico al jugador con mensaje
+			System.out.println("¡Enhorabuena, ha ganado!");
+
+			// de lo contrario significa que la salida se debe a que la casilla seleccionada
+			// era un mina por lo que el jugador ha perdido
+		} else {
+			// se lo comunico al jugador con mensaje
+			System.out.println("Lo siento, ha perdido.");
+		}
+
+		// cierro escaner
+		dogma.close();
 	}
 
 }

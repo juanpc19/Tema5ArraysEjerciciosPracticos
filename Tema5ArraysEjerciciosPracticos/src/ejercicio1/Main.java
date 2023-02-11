@@ -4,28 +4,31 @@ import java.util.Scanner;
 
 public class Main {
 
-	// crear funcion con boleanos y añadir boleano a do while para comprobar si he ganado
-	//(for recorre array y si todas posiciones diferentes a ? he ganado) 
 	public static void main(String[] args) {
 
-		char tablero[] = new char[0];
-
-		// cerrar el escaner solo cuando este todo hecho sino puede dar error
-		// cerrarlo desde el main que deberia cerrar tambien el de la funcion
+		// creo escaner y lo llamo dogma
 		Scanner dogma = new Scanner(System.in);
 
+		// solicito a jugador valor para atributo longitud
 		System.out.println("¿Cuantas casillas desea en su tablero? ");
 
+		// asigno a atributo longitud valor mediante escaner
 		FuncionesEj1.longitud = dogma.nextInt();
 
+		// solicito a jugador valor para atributo minas
 		System.out.println("¿Cuantas minas desea en su tablero? ");
 
+		// asigno a atributo minas valor mediante escaner
 		FuncionesEj1.minas = dogma.nextInt();
 
-		tablero = FuncionesEj1.creaArray(tablero);
+		// llamo a funcion estatica creaArray dentro de FuncionesEj1
+		FuncionesEj1.creaArray();
 
-		FuncionesEj1.ejecutaJuego(tablero);
+		// llamo a funcion estatica ejecutaJuego dentro de FuncionesEj1
+		FuncionesEj1.ejecutaJuego();
+
+		// cierro escaner
+		dogma.close();
 
 	}
-
 }
