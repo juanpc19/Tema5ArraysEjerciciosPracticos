@@ -153,11 +153,11 @@ public class FuncionesEj1 {
 
 	/**
 	 * 
-	 * funcion estatica que iniciara el juego y entrara en un bucle que mostrara al jugador
-	 * su tablero y le solicitara una casilla a destapar que destapara usando
-	 * funcion destapaMultiplesCasillas segun sea oportuno o no, el bucle estara en
-	 * ejecucion mientras el jugador no seleccione una casilla con mina o gane la
-	 * partida (para esta comprobacion usara la funcion jugadorGana)
+	 * funcion estatica que iniciara el juego y entrara en un bucle que mostrara al
+	 * jugador su tablero y le solicitara una casilla a destapar que destapara
+	 * usando funcion destapaMultiplesCasillas segun sea oportuno o no, el bucle
+	 * estara en ejecucion mientras el jugador no seleccione una casilla con mina o
+	 * gane la partida (para esta comprobacion usara la funcion jugadorGana)
 	 * 
 	 */
 	static void ejecutaJuego() {

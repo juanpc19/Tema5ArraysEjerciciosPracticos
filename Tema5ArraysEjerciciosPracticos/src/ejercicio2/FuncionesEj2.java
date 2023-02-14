@@ -11,8 +11,8 @@ public class FuncionesEj2 {
 	static double puntuacionJugador2 = 0;// atributo que guardara el valor de la puntuacion del jugador 2
 
 	/**
-	 * funcion estatica que sacara cartas mientras el jugador lo indique y sumara el valor de
-	 * cada carta a puntuacion
+	 * funcion estatica que sacara cartas mientras el jugador lo indique y sumara el
+	 * valor de cada carta a puntuacion
 	 * 
 	 * @return puntuacion devuelve el valor de la suma total de todas las cartas
 	 *         sacadas por un jugador
@@ -58,6 +58,8 @@ public class FuncionesEj2 {
 			// el bucle se seguira ejecutando mientras menor8 devuelva true y el jugador
 			// siga pidiendo cartas
 		} while (menor8(puntuacion) == true && decisionJugador.equals("si"));
+
+		dogma.close();
 
 		return puntuacion;
 	}
