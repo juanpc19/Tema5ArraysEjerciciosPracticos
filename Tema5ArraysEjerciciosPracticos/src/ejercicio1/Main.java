@@ -1,5 +1,6 @@
 package ejercicio1;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -22,13 +23,33 @@ public class Main {
 		FuncionesEj1.minas = dogma.nextInt();
 
 		// llamo a funcion estatica creaArray dentro de FuncionesEj1
-		FuncionesEj1.creaArray();
+		FuncionesEj1.creaTablero();
+
+		// print para comprobar funcionamiento
+		// System.out.println("Arrays tablero creado: " +
+		// Arrays.toString(FuncionesEj1.tableroCreado));
+
+		// llamo a funcion estatica creaArray dentro de FuncionesEj1
+		FuncionesEj1.creaTableroJugador();
 
 		// llamo a funcion estatica ejecutaJuego dentro de FuncionesEj1
 		FuncionesEj1.ejecutaJuego();
 
 		// cierro escaner
 		dogma.close();
+
+		// al finalizar la funcione jecutaJuego compruebo el estado de
+		// victoria, de ser este true significa que el jugador ha ganado
+		if (FuncionesEj1.victoria == true) {
+			// se lo comunico al jugador con mensaje
+			System.out.println("¡Enhorabuena, ha ganado!");
+
+			// de lo contrario significa que la salida de la funcion se debe a que la
+			// casilla seleccionada era un mina por lo que el jugador ha perdido
+		} else {
+			// se lo comunico al jugador con mensaje
+			System.out.println("Lo siento, ha perdido.");
+		}
 
 	}
 }

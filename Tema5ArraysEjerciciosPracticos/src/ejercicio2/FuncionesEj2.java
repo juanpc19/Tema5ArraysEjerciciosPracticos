@@ -11,7 +11,7 @@ public class FuncionesEj2 {
 	static double puntuacionJugador2 = 0;// atributo que guardara el valor de la puntuacion del jugador 2
 
 	/**
-	 * funcion que sacara cartas mientras el jugador lo indique y sumara el valor de
+	 * funcion estatica que sacara cartas mientras el jugador lo indique y sumara el valor de
 	 * cada carta a puntuacion
 	 * 
 	 * @return puntuacion devuelve el valor de la suma total de todas las cartas
@@ -63,7 +63,7 @@ public class FuncionesEj2 {
 	}
 
 	/**
-	 * funcion que evaluara si la puntuacion que se le pasa es menor a 8
+	 * funcion estatica que evaluara si la puntuacion que se le pasa es menor a 8
 	 * 
 	 * @param valorPuntuacion parametro de entrada que recibira la puntuacion de un
 	 *                        jugador
@@ -84,7 +84,7 @@ public class FuncionesEj2 {
 	}
 
 	/**
-	 * funcion que decidira quien gana el juego
+	 * funcion estatica que decidira quien gana el juego
 	 * 
 	 * @return devolvera 0 si empatan 1 si jugador gana y 2 si jugador 2 gana
 	 */

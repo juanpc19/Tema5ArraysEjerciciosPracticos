@@ -19,9 +19,13 @@ public class FuncionesEj1 {
 
 	static char tableroJugador[];// guardara el tablero del jugador que creara la funcion ejecutaJuego
 
-	// funcion estatica que creara el tablero para la partida,
-	// llenandolo de minas, 0, 1, o 2
-	static void creaArray() {
+	/**
+	 * 
+	 * funcion estatica que creara el tablero para la partida, llenandolo de minas,
+	 * 0, 1, o 2
+	 * 
+	 */
+	static void creaTablero() {
 
 		tableroCreado = new char[longitud];// doy a atributo tableroCreado longitud igual a atributo longitud
 
@@ -39,15 +43,15 @@ public class FuncionesEj1 {
 		while (contador < minas) {
 
 			// inserto una mina en una posicion aleatoria entre 0 y longitud, debido a
-			// funcionamiento de Math.random() posInsercionAleatoria tomara un valor de
-			// longitud-1
+			// funcionamiento de Math.random() posInsercionAleatoria tomara un valor maximo
+			// de longitud-1
 			posInsercionAleatoria = (int) (Math.random() * longitud);
 
 			// si la posInsercionAleatoria no contiene un mina
 			if (tableroCreado[posInsercionAleatoria] != '*') {
 				// la insertara en dicha posicion
 				tableroCreado[posInsercionAleatoria] = '*';
-				// y añadira +1 al contador
+				// y añadira +1 al contador de minas
 				contador++;
 
 				// si la posicion donde inserto la mina no es la ultima casilla y la siguiente
@@ -76,14 +80,14 @@ public class FuncionesEj1 {
 				tableroCreado[posicion] = '2';
 			}
 		}
-		// print para comprobar funcionamiento con facilidad
-		System.out.println(Arrays.toString(tableroCreado));
-
 	}
 
-	// funcion estatica que destapara las casillas adyacentes a la seleccionada por
-	// el
-	// jugador si estas no son minas o fin de tablero
+	/**
+	 * 
+	 * funcion estatica que destapara las casillas adyacentes a la seleccionada por
+	 * el jugador si estas no son minas o fin de tablero
+	 * 
+	 */
 	static void destapaMultiplesCasillas() {
 
 		// bucle que recorre tableroCreado hacia la izquierda desde la posicion anterior
@@ -105,10 +109,13 @@ public class FuncionesEj1 {
 		}
 	}
 
-	// funcion estatica que contara la cantidad de casillas destapadas con exito por
-	// el
-	// jugador modificando el valor de el elemento victoria si el jugador ha
-	// destapado las casillas necesarias
+	/**
+	 * 
+	 * funcion estatica que contara la cantidad de casillas destapadas con exito por
+	 * el jugador modificando el valor de el atributo victoria si el jugador ha
+	 * destapado las casillas necesarias
+	 * 
+	 */
 	static void jugadorGana() {
 
 		int contador = 0;// guardara la cantidad de casillas del array tableroJugador que contienen un
@@ -132,26 +139,31 @@ public class FuncionesEj1 {
 		}
 	}
 
-	// funcion que creara el tablero del jugador y lo llenara de incognitas ('?')
-	// mostrandoselo una vez, entonces entrara en un bucle que mostrara al jugador
-	// su tablero y le solicitara una casilla a destapar que destapara
-	// usando funcion destapaMultiplesCasillas segun sea oportuno o no, el bucle
-	// estara en ejecucion mientras el jugador no seleccione una casilla con mina
-	// o gane la partida (para esta comprobacion usara la funcion jugadorGana),
-	// al salir de bucle comprobara que mensaje dar al usuario
-	// segun este gane o pierda la partida
-	static void ejecutaJuego() {
+	/**
+	 * funcion estatica que creara el tablero del jugador
+	 */
+	static void creaTableroJugador() {
 
 		tableroJugador = new char[longitud];// doy al atributo tableroJugador una longitud igual a atributo longitud
 
+		// lleno el tablero de '?' haciendo uso de la funcion fill de la clase Arrays
+		Arrays.fill(tableroJugador, '?');
+
+	}
+
+	/**
+	 * 
+	 * funcion estatica que iniciara el juego y entrara en un bucle que mostrara al jugador
+	 * su tablero y le solicitara una casilla a destapar que destapara usando
+	 * funcion destapaMultiplesCasillas segun sea oportuno o no, el bucle estara en
+	 * ejecucion mientras el jugador no seleccione una casilla con mina o gane la
+	 * partida (para esta comprobacion usara la funcion jugadorGana)
+	 * 
+	 */
+	static void ejecutaJuego() {
+
 		// creo escaner y lo nombro dogma
 		Scanner dogma = new Scanner(System.in);
-
-		// recorro tableroJugador
-		for (int posicion = 0; posicion < longitud; posicion++) {
-			// dando valor '?' a todas sus posiciones
-			tableroJugador[posicion] = '?';
-		}
 
 		// mensaje por consola de inicio de partida
 		System.out.println("¡Empieza el juego!");
@@ -187,19 +199,6 @@ public class FuncionesEj1 {
 			// mientras posicion numeroJugador de tableroCreado sea distinto a mina
 			// y victoria no sea igual a true el bucle se mantendra en ejecucion
 		} while (tableroCreado[numeroJugador] != '*' && victoria != true);
-
-		// al salir del bucle comprobara el estado de victoria, de ser este true
-		// significa que el jugador ha ganado
-		if (victoria == true) {
-			// se lo comunico al jugador con mensaje
-			System.out.println("¡Enhorabuena, ha ganado!");
-
-			// de lo contrario significa que la salida se debe a que la casilla seleccionada
-			// era un mina por lo que el jugador ha perdido
-		} else {
-			// se lo comunico al jugador con mensaje
-			System.out.println("Lo siento, ha perdido.");
-		}
 
 		// cierro escaner
 		dogma.close();
