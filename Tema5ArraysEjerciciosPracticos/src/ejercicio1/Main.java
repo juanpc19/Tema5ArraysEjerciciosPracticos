@@ -32,8 +32,40 @@ public class Main {
 		// llamo a funcion estatica creaArray dentro de FuncionesEj1
 		FuncionesEj1.creaTableroJugador();
 
-		// llamo a funcion estatica ejecutaJuego dentro de FuncionesEj1
-		FuncionesEj1.ejecutaJuego();
+		// mensaje por consola de inicio de partida
+		System.out.println("¡Empieza el juego!");
+		System.out.println();
+
+		// muestro al jugador su tablero
+		System.out.println(Arrays.toString(FuncionesEj1.tableroJugador));
+
+		// conjunto de instrucciones de bucle do while
+		do {
+
+			// solicito al jugador casilla a destapar
+			System.out.println("Indique una casilla a destapar entre 0 y " + (FuncionesEj1.longitud - 1));
+
+			// doy a atributo numeroJugador valor introducido por jugador
+			FuncionesEj1.numeroJugador = dogma.nextInt();
+
+			// destapa casilla de tableroJugador en posicion numeroJugador sea mina o no
+			FuncionesEj1.tableroJugador[FuncionesEj1.numeroJugador] = FuncionesEj1.tableroCreado[FuncionesEj1.numeroJugador];
+
+			// uso funcion destapaMultiplesCasillas tableroCreado en posicion de
+			// numeroJugador no es mina
+			if (FuncionesEj1.tableroCreado[FuncionesEj1.numeroJugador] != '*') {
+				FuncionesEj1.destapaMultiplesCasillas();
+			}
+
+			// uso funcion jugadorGana para comprobar el estado de la partida
+			FuncionesEj1.jugadorGana();
+
+			// muestro a jugador su tablero actualizado con las casillas destapadas
+			System.out.println(Arrays.toString(FuncionesEj1.tableroJugador));
+
+			// mientras posicion numeroJugador de tableroCreado sea distinto a mina
+			// y victoria no sea igual a true el bucle se mantendra en ejecucion
+		} while (FuncionesEj1.tableroCreado[FuncionesEj1.numeroJugador] != '*' && FuncionesEj1.victoria != true);
 
 		// cierro escaner
 		dogma.close();
