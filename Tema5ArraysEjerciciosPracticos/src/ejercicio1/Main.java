@@ -25,10 +25,6 @@ public class Main {
 		// llamo a funcion estatica creaTablero dentro de FuncionesEj1
 		FuncionesEj1.creaTablero();
 
-		// print para comprobar funcionamiento
-		// System.out.println("Arrays tablero creado: " +
-		// Arrays.toString(FuncionesEj1.tableroCreado));
-
 		// llamo a funcion estatica creaArray dentro de FuncionesEj1
 		FuncionesEj1.creaTableroJugador();
 
@@ -70,7 +66,7 @@ public class Main {
 		// cierro escaner
 		dogma.close();
 
-		// al finalizar la funcione jecutaJuego compruebo el estado de
+		// al finalizar el bucle compruebo el estado de
 		// victoria, de ser este true significa que el jugador ha ganado
 		if (FuncionesEj1.victoria == true) {
 			// se lo comunico al jugador con mensaje
