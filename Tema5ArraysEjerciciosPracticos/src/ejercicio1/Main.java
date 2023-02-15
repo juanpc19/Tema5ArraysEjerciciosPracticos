@@ -22,7 +22,7 @@ public class Main {
 		// asigno a atributo minas valor mediante escaner
 		FuncionesEj1.minas = dogma.nextInt();
 
-		// llamo a funcion estatica creaArray dentro de FuncionesEj1
+		// llamo a funcion estatica creaTablero dentro de FuncionesEj1
 		FuncionesEj1.creaTablero();
 
 		// print para comprobar funcionamiento

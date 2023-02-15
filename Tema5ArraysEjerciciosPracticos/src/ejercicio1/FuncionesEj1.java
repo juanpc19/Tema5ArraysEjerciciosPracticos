@@ -33,11 +33,9 @@ public class FuncionesEj1 {
 
 		int contador = 0; // guardara cantidad de minas insertadas en tableroCreado
 
-		// recorro tableroCreado
-		for (int posicion = 0; posicion < longitud; posicion++) {
-			// dando valor 0 a todos sus elementos
-			tableroCreado[posicion] = '0';
-		}
+		// lleno el tableroCreado con '0' haciendo uso de la funcion fill de la clase
+		// Arrays
+		Arrays.fill(tableroCreado, '0');
 
 		// bucle que se ejecutara mientras queden minas a insertar
 		while (contador < minas) {
